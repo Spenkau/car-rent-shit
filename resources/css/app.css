@@ -1,0 +1,613 @@
+@import 'tailwindcss';
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    margin: 0;
+
+}
+
+.site-header.dark {
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 1000; /* Убедитесь, что navbar находится поверх других элементов */
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    height: 48px;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #ccc;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.main-nav a.active,
+.main-nav a:hover {
+    color: #fff;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: #00aaff;
+    transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+
+.main-banner {
+    position: relative;
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    height: 400px;
+}
+
+.banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+    color: white;
+}
+
+.reserve-btn {
+    background-color: #ff8c00;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: 2px solid #ff8c00;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reserve-btn:hover {
+    background-color: #ff5722;
+    border-color: #ff5722;
+    transform: scale(1.05);
+}
+
+.reserve-btn:focus {
+    box-shadow: 0 0 8px rgba(255, 137, 0, 0.8);
+}
+
+/*ЛУЧШИЕ ПРЕДЛОЖЕНИЯ*/
+.offers {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #ffffff;
+    color: #121212;
+}
+
+.offers h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #ff8c00;
+    font-weight: 600;
+}
+
+.car-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.car-card {
+    background-color: #1f2326;
+    border-radius: 16px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1); /* Глубокая тень для эффектности */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Плавные анимации */
+    overflow: hidden;
+    text-align: center; /* Центрируем текст */
+    position: relative;
+}
+
+.car-card:hover {
+    /* transform: translateY(-12px); /* Легкое поднятие при наведении */
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
+    background-color: #282c32; /* Светлее фон при наведении */
+}
+
+.car-card img {
+    width: 100%;
+    height: 180px; /* Установим фиксированную высоту для изображения */
+    object-fit: cover; /* Обрезка изображения */
+    border-radius: 10px; /* Скругление углов */
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.car-card:hover img {
+    transform: scale(1.05); /* Легкое увеличение изображения при наведении */
+}
+
+.car-info {
+    margin-bottom: 20px; /* Отступ снизу для информации */
+}
+
+.car-info h3 {
+    font-size: 22px;
+    color: #f1f1f1; /* Яркий белый цвет для заголовка */
+    font-weight: 700; /* Увеличенный жирный шрифт */
+    margin-bottom: 12px;
+}
+
+.car-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #999; /* Светло-серый для текста */
+    font-size: 14px;
+}
+
+.car-info li {
+    margin-bottom: 8px; /* Увеличиваем отступы между пунктами */
+}
+
+.car-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.car-price {
+    font-size: 20px;
+    color: #ff8c00; /* Яркий оранжевый цвет для цены */
+    font-weight: 600;
+}
+
+.more-btn {
+    background-color: #00aaff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 50px; /* Округлая кнопка */
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.more-btn:hover {
+    background-color: #0099cc;
+    transform: scale(1.05); /* Легкое увеличение кнопки */
+}
+
+.autopark-button-wrapper {
+    margin-top: 30px;
+}
+
+.autopark-btn {
+    background-color: #00aaff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.autopark-btn:hover {
+    background-color: #0099cc;
+    transform: scale(1.05);
+}
+
+
+
+
+/*ДОСТОИНСТВА*/
+.advantages {
+    background: #ffffff;
+    padding: 80px 20px;
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #1a1a1a;
+}
+
+.advantages-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+.text-block {
+    text-align: left;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 600;
+    color: #0d0d0d;
+    margin-bottom: 24px;
+    border-left: 6px solid #222222;
+    padding-left: 16px;
+}
+
+.section-description {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.guarantees {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guarantees li {
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.guarantees li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    background-color: #222222;
+    border-radius: 50%;
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 40px;
+    text-align: center;
+}
+
+.icon-block {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px 20px;
+    transition: background 0.3s ease;
+    border: 1px solid #e6e6e6;
+}
+
+.icon-block:hover {
+    background-color: #eef2f7;
+}
+
+.icon-block img {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 12px;
+    filter: grayscale(100%) brightness(0.4);
+}
+
+.icon-block h4 {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+
+
+
+
+
+
+/* Стили для блока условий проката */
+.rental-terms {
+    background-color: #e7f1f8; /* Нежный голубоватый фон */
+    padding: 60px 20px;
+    color: #333; /* Темный текст для читаемости */
+}
+
+.rental-terms-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 40px;
+    margin-bottom: 40px;
+    color: #004d6e; /* Темно-синий акцент */
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.rental-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: center;
+}
+
+.terms-list {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.term-item {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+.term-item span {
+    font-size: 22px;
+    font-weight: 700;
+    color: #00aaff; /* Яркий акцент для чисел */
+}
+
+.term-item:hover {
+    transform: translateX(10px); /* Легкий эффект при наведении */
+}
+
+.terms-image {
+    position: relative;
+    padding: 20px;
+}
+
+.terms-image img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.terms-image img:hover {
+    transform: scale(1.05); /* Эффект увеличения изображения при наведении */
+}
+
+.terms-info {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.terms-info p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #444;
+}
+
+.terms-info .note {
+    font-size: 14px;
+    color: #888;
+}
+
+.reserve-btn {
+    background-color: #00aaff;
+    color: white;
+    font-size: 18px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 170, 255, 0.2);
+    margin-top: 30px;
+}
+
+.reserve-btn:hover {
+    background-color: #0099cc;
+    transform: scale(1.1);
+}
+
+.reserve-btn:focus {
+    box-shadow: 0 0 8px rgba(0, 170, 255, 0.8);
+}
+
+
+
+
+/*зчастозадаваемые вопросы*/
+.faq-section {
+    background-color: #34495e;  /* Темный фон для контраста */
+    padding: 60px 20px;
+    color: #ecf0f1;
+    text-align: center;
+    border-top: 4px solid #ff8c00;  /* Яркая линия сверху для акцента */
+}
+
+.faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 36px;
+    color: #ff8c00;  /* Яркий цвет для заголовка */
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.faq-items {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;  /* Пространство между элементами */
+}
+
+.faq-item {
+    background-color: #2c3e50;  /* Темный фон для каждого блока */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;  /* Плавные переходы */
+}
+
+.faq-item:hover {
+    background-color: #1abc9c;  /* Цвет при наведении */
+    transform: translateY(-4px);  /* Легкое поднятие */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);  /* Более яркая тень */
+}
+
+.faq-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.faq-toggle-icon {
+    font-size: 24px;
+    color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.open .faq-toggle-icon {
+    transform: rotate(180eg);  /* Поворот плюса в минус */
+}
+
+.faq-question {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.faq-answer {
+    font-size: 16px;
+    color: #bdc3c7;
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #34495e;  /* Тот же цвет, что и фон секции */
+    display: none;  /* Скрываем по умолчанию */
+}
+
+.faq-item.open .faq-answer {
+    display: block;  /* Показываем при открытии */
+}
+
+
+
+/* Стили футера */
+.site-footer {
+    background-color: #121212; /* Темный фон */
+    color: #fff;
+    padding: 60px 20px;
+    font-size: 16px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-about, .footer-links, .footer-contacts {
+    width: 30%;
+    min-width: 250px;
+}
+
+.footer-about h3, .footer-links h3, .footer-contacts h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #ff8c00; /* Яркий акцент */
+}
+
+.footer-about p, .footer-links ul, .footer-contacts p {
+    font-size: 16px;
+    color: #bbb; /* Светлый текст */
+    line-height: 1.6;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #bbb;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #ff8c00; /* Акцент при наведении */
+}
+
+.footer-social a {
+    margin-right: 12px;
+}
+
+.footer-social img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.footer-social img:hover {
+    transform: scale(1.2); /* Увеличение иконки при наведении */
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    .car-card {
+        width: 100%;
+    }
+}
