@@ -2,12 +2,19 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Product extends Model
 {
+    use Sluggable;
+    /**
+     * @var string
+     */
+    protected $table = 'products';
+
     /**
      * @var string[]
      */
@@ -28,5 +35,14 @@ class Product extends Model
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => ['name', 'id']
+            ]
+        ];
     }
 }

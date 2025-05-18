@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RentController extends Controller
+class ContactController extends Controller
 {
-
+    //
 }

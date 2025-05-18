@@ -26,6 +26,9 @@ class ProductSetting extends Model
         'is_customs_cleared',
         'is_crashed',
         'is_on_credit',
+        'price',
+        'model_3d',
+        'image'
     ];
 
     /**

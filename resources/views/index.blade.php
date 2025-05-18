@@ -1,189 +1,134 @@
 @extends('layouts.app')
 
 @section('main')
-    <section class="main-banner" id="home">
-        <div class="banner-content">
-            <h1 class="uppercase">аренда автомобилей в гродно</h1>
-            <button class="reserve-btn">Забронировать</button>
+    <section class="main-banner bg-gradient-to-r from-gray-800 via-teal-900 to-gray-800 py-20 text-center h-[400px] flex items-center justify-center" id="home">
+        <div class="banner-content max-w-2xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold uppercase text-white mb-6">аренда автомобилей в Гродно</h1>
+            <button
+                data-toggle="modal"
+                class="cursor-pointer reserve-btn bg-orange-500 text-white text-lg px-6 py-3 rounded-full border-2 border-orange-500 hover:bg-orange-600 hover:border-orange-600 hover:scale-105 transition-all focus:ring-4 focus:ring-orange-500/50"
+            >
+                Забронировать
+            </button>
         </div>
     </section>
-    <div class="offers">
-        <h2>Лучшие предложения</h2>
-        <div class="car-list">
-            <div class="car-card">
-                <img src="{{ asset('images/cars/seat-leon.png') }}" alt="Seat Leon">
-                <div class="car-info">
-                    <h3>Seat Leon</h3>
-                    <ul>
-                        <li>Год выпуска: 2018</li>
-                        <li>Объем двигателя: 1.5</li>
-                    </ul>
+
+    <section class="offers bg-white py-16 text-gray-900 text-center">
+        <h2 class="text-3xl font-semibold text-orange-500 mb-10">Лучшие предложения</h2>
+        <div class="car-list max-w-7xl mx-auto flex justify-center gap-6 flex-wrap">
+            @foreach($products->take(3) as $product)
+                <div class="car-card bg-gray-800 rounded-2xl p-6 w-full sm:w-80 shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all">
+                    <img src="{{ $product->settings->image ? asset('storage/' . $product->settings->image) : asset('images/logo.png') }}" alt="{{ $product->name }}" class="w-full h-48 object-cover rounded-lg mb-4 hover:scale-105 transition-transform">
+                    <div class="car-info mb-4">
+                        <h3 class="text-xl font-bold text-white">{{ $product->name }}</h3>
+                        <ul class="list-none p-0 text-gray-400 text-sm">
+                            <li>Год выпуска: {{ $product->settings->release_year ?? 'N/A' }}</li>
+                            <li>{{ $product->settings->engine_volume
+                                    ? 'Объем двигателя: ' . $product->settings->engine_volume : null
+                                }}
+                                {{
+                                    $product->settings->gearbox_type
+                                        ? 'Тип КПП: ' . $product->settings->gearbox_type
+                                        : null
+                                }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="car-bottom flex justify-center items-center gap-4">
+                        <span class="car-price text-lg font-semibold text-orange-500">{{ $product->price }}</span>
+                        <a href="{{ route('products.show', $product->slug) }}" class="more-btn bg-cyan-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-cyan-600 hover:scale-105 transition-all">Подробнее</a>
+                    </div>
                 </div>
-                <div class="car-bottom">
-                    <span class="car-price">70 BYN</span>
-                    <a href="#" class="more-btn">Подробнее</a>
-                </div>
-            </div>
-            <div class="car-card">
-                <img src="{{ asset("images/cars/toyota-prius.png") }}" alt="Toyota Prius C">
-                <div class="car-info">
-                    <h3>Toyota Prius C</h3>
-                    <ul>
-                        <li>Год выпуска: 2015</li>
-                        <li>Тип КПП: механика</li>
-                    </ul>
-                </div>
-                <div class="car-bottom">
-                    <span class="car-price">60 BYN</span>
-                    <a href="#" class="more-btn">Подробнее</a>
-                </div>
-            </div>
-            <div class="car-card">
-                <img src="{{ asset("images/cars/hyundai-accent.png") }}" alt="Hyundai Accent">
-                <div class="car-info">
-                    <h3>Hyundai Accent</h3>
-                    <ul>
-                        <li>Год выпуска: 2022</li>
-                        <li>Объем двигателя: 1.5</li>
-                    </ul>
-                </div>
-                <div class="car-bottom">
-                    <span class="car-price">70 BYN</span>
-                    <a href="#" class="more-btn">Подробнее</a>
-                </div>
-            </div>
+            @endforeach
         </div>
-        <div class="autopark-button-wrapper">
-            <a href="{{ route('product.index') }}" class="autopark-btn">Наш автопарк</a>
+        <div class="autopark-button-wrapper mt-8">
+            <a href="{{ route('products.index') }}" class="autopark-btn bg-cyan-500 text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-cyan-600 hover:scale-105 transition-all">Наш автопарк</a>
         </div>
-    </div>
-    <section class="advantages">
-        <div class="advantages-wrapper">
-            <div class="text-block">
-                <h2 class="section-title">Почему выбирают CarGrodno</h2>
-                <p class="section-description">
+    </section>
+
+    <section class="advantages bg-white py-20">
+        <div class="advantages-wrapper max-w-7xl mx-auto px-4 grid gap-10">
+            <div class="text-block max-w-3xl mx-auto">
+                <h2 class="section-title text-3xl font-semibold text-gray-900 border-l-4 border-gray-900 pl-4 mb-6">Почему выбирают CarGrodno</h2>
+                <p class="section-description text-lg text-gray-600 leading-relaxed mb-5">
                     Услуги аренды автомобилей для частных лиц, компаний и гостей Беларуси.<br>
                     Простой и удобный сервис, гибкие условия — от одного дня до нескольких месяцев.
                 </p>
-                <ul class="guarantees">
-                    <li>Технически исправные автомобили</li>
-                    <li>Всегда чистые и ухоженные салоны</li>
-                    <li>Персональный подход к каждому</li>
+                <ul class="guarantees list-none p-0">
+                    @foreach(['Технически исправные автомобили', 'Всегда чистые и ухоженные салоны', 'Персональный подход к каждому'] as $guarantee)
+                        <li class="relative pl-6 mb-2 text-base text-gray-600 before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:bg-gray-900 before:rounded-full">{{ $guarantee }}</li>
+                    @endforeach
                 </ul>
             </div>
-
-            <div class="icon-grid">
-                <div class="icon-block">
-                    <img src="{{ asset('images/icons/fleet.png') }}" alt="Автопарк">
-                    <h4>Большой автопарк</h4>
-                </div>
-                <div class="icon-block">
-                    <img src="{{ asset('images/icons/ac.png') }}" alt="Кондиционер">
-                    <h4>Кондиционер в каждой машине</h4>
-                </div>
-                <div class="icon-block">
-                    <img src="{{ asset('images/icons/child-seat.png') }}" alt="Кресло">
-                    <h4>Детское кресло бесплатно</h4>
-                </div>
-                <div class="icon-block">
-                    <img src="{{ asset('images/icons/insurance.png') }}" alt="Страховка">
-                    <h4>Страховка включена</h4>
-                </div>
-                <div class="icon-block">
-                    <img src="{{ asset('images/icons/highway.png') }}" alt="Магистрали">
-                    <h4>Бесплатный проезд по трассам</h4>
-                </div>
-                <div class="icon-block">
-                    <img src="{{ asset('images/icons/comfort.png') }}" alt="Комфорт">
-                    <h4>Максимальный комфорт</h4>
-                </div>
+            <div class="icon-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach([
+                    ['icon' => 'fleet.png', 'text' => 'Большой автопарк'],
+                    ['icon' => 'ac.png', 'text' => 'Кондиционер в каждой машине'],
+                    ['icon' => 'child-seat.png', 'text' => 'Детское кресло бесплатно'],
+                    ['icon' => 'insurance.png', 'text' => 'Страховка включена'],
+                    ['icon' => 'highway.png', 'text' => 'Бесплатный проезд по трассам'],
+                    ['icon' => 'comfort.png', 'text' => 'Максимальный комфорт']
+                ] as $icon)
+                    <div class="icon-block bg-gray-100 rounded-lg p-6 text-center border border-gray-200 hover:bg-gray-200 transition-colors">
+                        <img src="{{ asset('images/icons/' . $icon['icon']) }}" alt="{{ $icon['text'] }}" class="w-11 h-11 mx-auto mb-3 filter grayscale brightness-50">
+                        <h4 class="text-sm font-medium text-gray-900">{{ $icon['text'] }}</h4>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
-    <section class="rental-terms" id="terms">
-        <div class="rental-terms-container">
-            <h2 class="section-title">Условия проката автомобиля</h2>
-            <div class="rental-grid">
-                <div class="terms-list">
-                    <div class="term-item"><span>1</span> Паспорт</div>
-                    <div class="term-item"><span>2</span> Водительское удостоверение</div>
-                    <div class="term-item"><span>3</span> Оплата аренды авто</div>
-                    <div class="term-item"><span>4</span> Стаж вождения не менее 1 года</div>
-                    <div class="term-item"><span>5</span> Залог*</div>
-                </div>
 
-                <div class="terms-image">
-                    <img src="{{ asset('images/car-top.png') }}" alt="Вид сверху на автомобиль">
+    <section class="rental-terms bg-blue-50 py-16 text-gray-800" id="terms">
+        <div class="rental-terms-container max-w-7xl mx-auto px-4 text-center">
+            <h2 class="section-title text-4xl font-bold text-blue-900 mb-10">Условия проката автомобиля</h2>
+            <div class="rental-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="terms-list bg-white p-6 rounded-2xl shadow-lg">
+                    @foreach(['Паспорт', 'Водительское удостоверение', 'Оплата аренды авто', 'Стаж вождения не менее 1 года', 'Залог*'] as $index => $term)
+                        <div class="term-item text-lg font-semibold text-gray-800 mb-4 hover:translate-x-2 transition-transform">
+                            <span class="text-xl font-bold text-cyan-500">{{ $index + 1 }}</span> {{ $term }}
+                        </div>
+                    @endforeach
                 </div>
-
-                <div class="terms-info">
-                    <p>В стоимость суток аренды включено <strong>300 км пробега</strong>, каждые последующие 100 км
-                        — <strong>10 бел. рублей</strong>.</p>
-                    <p><strong>Мойка автомобиля в стоимость аренды не включена!</strong></p>
-                    <p class="note">
-                        *Необходим залог, который возвращается при возврате авто в прежнем состоянии (топливо,
-                        чистота, техническое состояние).<br>
+                <div class="terms-image p-4">
+                    <img src="{{ asset('images/car-top.png') }}" alt="Вид сверху на автомобиль" class="w-full rounded-lg object-cover hover:scale-105 transition-transform">
+                </div>
+                <div class="terms-info bg-white p-6 rounded-2xl shadow-lg">
+                    <p class="text-base mb-4">В стоимость суток аренды включено <strong>300 км пробега</strong>, каждые последующие 100 км — <strong>10 бел. рублей</strong>.</p>
+                    <p class="text-base mb-4"><strong>Мойка автомобиля в стоимость аренды не включена!</strong></p>
+                    <p class="note text-sm text-gray-500">
+                        *Необходим залог, который возвращается при возврате авто в прежнем состоянии (топливо, чистота, техническое состояние).<br>
                         <strong>Для граждан РБ:</strong> 300 бел. рублей<br>
                         <strong>Для иностранных граждан:</strong> 600 бел. рублей
                     </p>
                 </div>
             </div>
-
-            <div class="rental-button-wrap">
-                <button class="reserve-btn">Оставить заявку</button>
+            <div class="rental-button-wrap mt-8">
+                <button class="reserve-btn bg-cyan-500 text-white text-lg px-8 py-4 rounded-full hover:bg-cyan-600 hover:scale-110 transition-all shadow-lg">Оставить заявку</button>
             </div>
         </div>
     </section>
 
-    <section class="faq-section" id="faq">
-        <div class="faq-container">
-            <h2 class="section-title">Часто задаваемые вопросы</h2>
-
-            <div class="faq-items">
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <span class="faq-toggle-icon">+</span>
-                        <p class="faq-question">Как я могу забронировать автомобиль?</p>
+    <section class="faq-section bg-gray-800 py-16 text-white text-center border-t-4 border-orange-500" id="faq">
+        <div class="faq-container max-w-7xl mx-auto px-4">
+            <h2 class="section-title text-3xl font-bold text-orange-500 mb-10">Часто задаваемые вопросы</h2>
+            <div class="faq-items flex flex-col gap-6">
+                @foreach([
+                    ['question' => 'Как я могу забронировать автомобиль?', 'answer' => 'Для бронирования автомобиля выберите нужный автомобиль на нашем сайте, заполните форму и оставьте заявку. Мы свяжемся с вами для подтверждения бронирования.'],
+                    ['question' => 'Какие документы необходимы для аренды?', 'answer' => 'Для аренды автомобиля вам нужно предоставить паспорт, водительское удостоверение, а также оплатить аренду и залог, если требуется.'],
+                    ['question' => 'Есть ли ограничение по возрасту для арендаторов?', 'answer' => 'Да, для аренды автомобиля необходимо быть старше 21 года и иметь стаж вождения не менее 1 года.'],
+                    ['question' => 'Как я могу вернуть автомобиль?', 'answer' => 'Вы можете вернуть автомобиль в пункт проката в течение согласованного срока. Важно вернуть автомобиль в хорошем состоянии, с полным баком и без повреждений.']
+                ] as $faq)
+                    <div class="faq-item bg-gray-700 rounded-lg p-6 shadow-lg hover:bg-teal-600 hover:-translate-y-1 transition-all cursor-pointer">
+                        <div class="faq-header flex justify-between items-center">
+                            <p class="faq-question text-lg font-semibold text-white m-0 flex-grow">{{ $faq['question'] }}</p>
+                            <span class="faq-toggle-icon text-2xl text-white">+</span>
+                        </div>
+                        <div class="faq-answer text-base text-gray-300 mt-3 p-4 rounded-lg bg-gray-800 hidden">{{ $faq['answer'] }}</div>
                     </div>
-                    <div class="faq-answer">
-                        <p>Для бронирования автомобиля выберите нужный автомобиль на нашем сайте, заполните форму и
-                            оставьте заявку. Мы свяжемся с вами для подтверждения бронирования.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <span class="faq-toggle-icon">+</span>
-                        <p class="faq-question">Какие документы необходимы для аренды?</p>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Для аренды автомобиля вам нужно предоставить паспорт, водительское удостоверение, а также
-                            оплатить аренду и залог, если требуется.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <span class="faq-toggle-icon">+</span>
-                        <p class="faq-question">Есть ли ограничение по возрасту для арендаторов?</p>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Да, для аренды автомобиля необходимо быть старше 21 года и иметь стаж вождения не менее 1
-                            года.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <span class="faq-toggle-icon">+</span>
-                        <p class="faq-question">Как я могу вернуть автомобиль?</p>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Вы можете вернуть автомобиль в пункт проката в течение согласованного срока. Важно
-                            вернуть автомобиль в хорошем состоянии, с полным баком и без повреждений.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+
+    <x-book-any-car :products="$products"></x-book-any-car>
 @endsection

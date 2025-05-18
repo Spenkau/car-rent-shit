@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('product_settings', function (Blueprint $table) {
             $table->id();
 
-
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
 
             $table->year('release_year');
             $table->tinyInteger('gearbox_type');
-            $table->float('engine_volume');
+            $table->float('engine_volume')->nullable();
 
-            $table->tinyInteger('drive_type');
-            $table->unsignedSmallInteger('power');
+            $table->tinyInteger('engine_type')->nullable();
+            $table->tinyInteger('drive_type')->nullable();
+            $table->unsignedSmallInteger('power')->nullable();
             $table->unsignedSmallInteger('mileage')->nullable();
 
             $table->tinyInteger('doors_count')->nullable();
@@ -34,6 +34,10 @@ return new class extends Migration
             $table->boolean('is_customs_cleared')->default(true);
             $table->boolean('is_crashed')->default(false);
             $table->boolean('is_on_credit')->default(false);
+
+            $table->decimal('price')->nullable()->default(0.00);
+            $table->string('model_3d')->nullable()->after('is_on_credit');
+            $table->string('image')->nullable()->after('model_3d');
 
             $table->timestamps();
         });
