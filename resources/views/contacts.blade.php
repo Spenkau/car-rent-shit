@@ -48,27 +48,27 @@
                     </div>
                 </div>
 
-                <!-- Contact Form -->
-                <div class="contact-form bg-gray-800 rounded-2xl p-6 shadow-lg">
-                    <h2 class="text-2xl font-semibold text-orange-500 mb-4">Отправить сообщение</h2>
-                    <form id="contact-form" action="{{ route('contacts.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-300">Имя</label>
-                            <input type="text" id="name" name="name" class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-                            <input type="email" id="email" name="email" class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="message" class="block text-sm font-medium text-gray-300">Сообщение</label>
-                            <textarea id="message" name="message" rows="5" class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500" required></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-cyan-500 text-white text-lg px-8 py-3 rounded-full hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg">Отправить</button>
-                    </form>
-                </div>
-            </div>
+{{--                <!-- Contact Form -->--}}
+{{--                <div class="contact-form bg-gray-800 rounded-2xl p-6 shadow-lg">--}}
+{{--                    <h2 class="text-2xl font-semibold text-orange-500 mb-4">Отправить сообщение</h2>--}}
+{{--                    <form id="contact-form" action="{{ route('contacts.store') }}" method="POST">--}}
+{{--                        @csrf--}}
+{{--                        <div class="mb-4">--}}
+{{--                            <label for="name" class="block text-sm font-medium text-gray-300">Имя</label>--}}
+{{--                            <input type="text" id="name" name="name" class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500" required>--}}
+{{--                        </div>--}}
+{{--                        <div class="mb-4">--}}
+{{--                            <label for="email" class="block text-sm font-medium text-gray-300">Email</label>--}}
+{{--                            <input type="email" id="email" name="email" class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500" required>--}}
+{{--                        </div>--}}
+{{--                        <div class="mb-4">--}}
+{{--                            <label for="message" class="block text-sm font-medium text-gray-300">Сообщение</label>--}}
+{{--                            <textarea id="message" name="message" rows="5" class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500" required></textarea>--}}
+{{--                        </div>--}}
+{{--                        <button type="submit" class="w-full bg-cyan-500 text-white text-lg px-8 py-3 rounded-full hover:bg-cyan-600 hover:scale-105 transition-all shadow-lg">Отправить</button>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <!-- Map -->
             <div class="map mt-12">

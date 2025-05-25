@@ -57,7 +57,6 @@
                        name="full_name"
                        class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500"
                        placeholder="Иванов Иван"
-                       value="{{ auth()->user()->name . ' ' . auth()->user()->surname }}"
                        required>
             </div>
 
@@ -68,7 +67,6 @@
                        name="phone"
                        placeholder="+375(29)191-91-19"
                        class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500"
-                       value="{{ auth()->user()->phone }}"
                        required>
             </div>
 

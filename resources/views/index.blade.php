@@ -102,9 +102,9 @@
                     </p>
                 </div>
             </div>
-            <div class="rental-button-wrap mt-8">
-                <button class="reserve-btn bg-cyan-500 text-white text-lg px-8 py-4 rounded-full hover:bg-cyan-600 hover:scale-110 transition-all shadow-lg">Оставить заявку</button>
-            </div>
+{{--            <div class="rental-button-wrap mt-8">--}}
+{{--                <button class="reserve-btn bg-cyan-500 text-white text-lg px-8 py-4 rounded-full hover:bg-cyan-600 hover:scale-110 transition-all shadow-lg">Оставить заявку</button>--}}
+{{--            </div>--}}
         </div>
     </section>
 
