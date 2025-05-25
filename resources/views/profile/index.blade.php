@@ -37,7 +37,18 @@
             <div class="bookings bg-gray-800 rounded-2xl p-6 shadow-lg max-w-4xl mx-auto">
                 <h2 class="text-2xl font-semibold text-orange-500 mb-6">Ваши бронирования</h2>
 
-                @forelse($bookings as $booking)
+                <form method="GET" action="{{ route('profile.index') }}" class="mb-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-gray-800 p-4 rounded-xl">
+                    <label for="payment_status" class="text-white text-sm font-medium">Фильтр по оплате:</label>
+                    <select name="payment_status" id="payment_status" onchange="this.form.submit()"
+                            class="bg-gray-700 text-white rounded px-4 py-2 focus:ring-2 focus:ring-cyan-500">
+                        <option value="">Все</option>
+                        <option value="1" {{ request('payment_status') === '1' ? 'selected' : '' }}>Только оплаченные</option>
+                        <option value="0" {{ request('payment_status') === '0' ? 'selected' : '' }}>Только неоплаченные</option>
+                    </select>
+                </form>
+
+
+            @forelse($bookings as $booking)
                     <div class="mb-6 border border-gray-700 rounded-xl p-4 bg-gray-700">
                         <h3 class="text-xl font-bold text-cyan-400">{{ $booking->product->name }}</h3>
                         <p class="text-sm text-gray-300 mt-1">С {{ \Carbon\Carbon::parse($booking->start_date)->format('d.m.Y') }}

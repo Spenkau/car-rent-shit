@@ -16,13 +16,22 @@ class ProfileController extends Controller
     /**
      * @return View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user = auth()->user();
+
+        $bookingsQuery = $user->bookings()->with('product');
+
+        if ($request->filled('payment_status') && in_array($request->payment_status, ['0', '1'])) {
+            $bookingsQuery->where('payment_status', $request->payment_status);
+        }
+
         return view('profile.index', [
-            'user' => auth()->user(),
-            'bookings' => auth()->user()->bookings()->with('product')->get()
+            'user' => $user,
+            'bookings' => $bookingsQuery->get()
         ]);
     }
+
 
     /**
      * @return View

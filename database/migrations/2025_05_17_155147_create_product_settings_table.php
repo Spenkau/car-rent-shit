@@ -31,10 +31,6 @@ return new class extends Migration
             $table->string('color')->nullable();
             $table->string('vin')->nullable()->unique();
 
-            $table->boolean('is_customs_cleared')->default(true);
-            $table->boolean('is_crashed')->default(false);
-            $table->boolean('is_on_credit')->default(false);
-
             $table->decimal('price')->nullable()->default(0.00);
             $table->string('model_3d')->nullable()->after('is_on_credit');
             $table->string('image')->nullable()->after('model_3d');
