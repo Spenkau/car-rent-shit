@@ -4,8 +4,8 @@
     <section
         class="main-banner bg-gradient-to-r from-gray-800 via-teal-900 to-gray-800 py-20 text-center h-[400px] flex items-center justify-center"
         id="home">
-        <div class="banner-content max-w-2xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-bold uppercase text-white mb-6">@lang('views.home.main_banner.title')</h1>
+        <div class="banner-content max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-5xl font-bold uppercase text-white mb-6">@lang('views.home.main_banner.title')</h1>
             <button
                 class="cursor-pointer reserve-btn bg-orange-500 text-white text-lg px-6 py-3 rounded-full border-2 border-orange-500 hover:bg-orange-600 hover:border-orange-600 hover:scale-105 transition-all focus:ring-4 focus:ring-orange-500/50"
                 @if(auth()->check())
