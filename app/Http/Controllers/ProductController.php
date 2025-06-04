@@ -53,15 +53,12 @@ class ProductController extends Controller
 
     public function suggestions(Request $request): JsonResponse
     {
-        // Получаем фрагмент строки, который ввёл пользователь
         $query = $request->get('query', '');
 
-        // Если строка пустая, возвращаем пустой массив
         if (trim($query) === '') {
             return response()->json([]);
         }
 
-        // Ищем до 10 записей по названию (почти «LIKE %query%»)
         $matches = Product::query()->where('name', 'LIKE', "%{$query}%")
             ->orderBy('name')
             ->limit(10)

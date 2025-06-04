@@ -13,7 +13,7 @@ return [
         'full_name_placeholder' => 'Иванов Иван',
         'phone_placeholder' => '+375(29)191-91-19',
         'car' => 'Автомобиль: :name',
-        'price_per_day' => 'Цена за день: :price₽',
+        'price_per_day' => 'Цена за день: :priceBYN',
     ],
     'header' => [
         'home' => 'Главная',

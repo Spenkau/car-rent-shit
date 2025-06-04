@@ -37,6 +37,15 @@
                        required>
             </div>
 
+            <script>
+                const start = document.getElementById('start_date');
+                const end = document.getElementById('end_date');
+
+                start.addEventListener('change', () => {
+                    end.min = start.value;
+                });
+            </script>
+
             <div class="mb-4">
                 <label for="full_name" class="block text-sm font-medium text-gray-300">@lang('views.booking.full_name')</label>
                 <input type="text"

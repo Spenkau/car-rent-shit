@@ -12,10 +12,20 @@ class BookingController extends Controller
     {
         $data = $request->validate([
             'product_id' => ['required', 'integer', 'exists:products,id'],
-            'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date'],
+            'start_date' => ['required', 'date', 'after_or_equal:today'],
+            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
             'full_name' => ['required', 'string'],
             'phone' => ['nullable', 'string']
+        ], [
+            'start_date.required' => 'Заполните поле дата начала',
+            'start_date.date' => 'Поле дата должно быть датой',
+            'start_date.after_on_equal' => 'Введите корректную дату',
+            'end_date.required' => 'Заполните поле дата завершения',
+            'end_date.date' => 'Поле дата должно быть датой',
+            'end_date.after_or_equal' => 'ПОле дата завершения должна быть позже даты начала',
+            'full_name.required' => 'Имя обязательно для заполнения',
+            'full_name.string' => 'Поле "имя" должно быть строкой',
+            'phone.string' => 'Поле "телефон" должен быть строкой',
         ]);
 
         $user = auth()->user();
