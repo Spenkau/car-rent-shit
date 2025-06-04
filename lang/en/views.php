@@ -254,6 +254,7 @@ return [
             'gearbox_type' => 'Gearbox Type: :value',
             'more' => 'More Details',
             'autopark_button' => 'Our Fleet',
+            'price' => 'Price: :value',
         ],
         'advantages' => [
             'title' => 'Why Choose CarGrodno',

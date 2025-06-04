@@ -254,6 +254,7 @@ return [
             'gearbox_type' => 'Тип КПП :value',
             'more' => 'Подробнее',
             'autopark_button' => 'Наш автопарк',
+            'price' => 'Цена: :value',
         ],
         'advantages' => [
             'title' => 'Почему выбирают CarGrodno',

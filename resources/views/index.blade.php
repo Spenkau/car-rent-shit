@@ -43,6 +43,7 @@
                                     @lang('views.home.offers.gearbox_type', ['value' => $product->settings->gearbox_type])
                                 @endif
                             </li>
+                            <li>@lang('views.home.offers.price', ['value' => $product->settings->price])</li>
                         </ul>
                     </div>
                     <div class="car-bottom flex justify-center items-center gap-4">
