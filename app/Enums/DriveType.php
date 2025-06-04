@@ -14,9 +14,9 @@ enum DriveType: int
     public function name(): string
     {
         return match ($this) {
-            self::FRONT => 'Передний привод',
-            self::REAR => 'Задний привод',
-            self::AWD => 'Полный привод',
+            self::FRONT => __('views.cars.drive_options.front'),
+            self::REAR => __('views.cars.drive_options.rear'),
+            self::AWD => __('views.cars.drive_options.electric'),
         };
     }
 }

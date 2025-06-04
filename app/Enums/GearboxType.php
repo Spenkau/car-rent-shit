@@ -18,13 +18,13 @@ enum GearboxType: int
     public function name(): string
     {
         return match ($this) {
-            self::MANUAL => 'Механическая коробка передач',
-            self::AUTOMATIC => 'Автоматическая коробка передач',
-            self::AUTOMATED_MANUAL => 'Роботизированная механика',
-            self::CONTINUOUSLY_VARIABLE => 'Вариатор',
-            self::DUAL_CLUTCH => 'Коробка с двумя сцеплениями',
-            self::SEMI_AUTOMATIC => 'Полуавтоматическая коробка',
-            self::SEQUENTIAL => 'Секвентальная коробка',
+            self::MANUAL => __('views.cars.gearbox_options.manual'),
+            self::AUTOMATIC => __('views.cars.gearbox_options.automatic'),
+            self::AUTOMATED_MANUAL => __('views.cars.gearbox_options.robotic'),
+            self::CONTINUOUSLY_VARIABLE => __('views.cars.gearbox_options.variator'),
+            self::DUAL_CLUTCH => __('views.cars.gearbox_options.dual_clutch'),
+            self::SEMI_AUTOMATIC => __('views.cars.gearbox_options.semiautomatic'),
+            self::SEQUENTIAL => __('views.cars.gearbox_options.sequential'),
         };
     }
 
@@ -34,13 +34,13 @@ enum GearboxType: int
     public function shortName(): string
     {
         return match ($this) {
-            self::MANUAL => 'механика',
-            self::AUTOMATIC => 'автомат',
-            self::AUTOMATED_MANUAL => 'робот',
-            self::CONTINUOUSLY_VARIABLE => 'вариатор',
-            self::DUAL_CLUTCH => 'двойное сцепление',
-            self::SEMI_AUTOMATIC => 'полуавтомат',
-            self::SEQUENTIAL => 'секвентал',
+            self::MANUAL => __('views.cars.gearbox_options.manual'),
+            self::AUTOMATIC => __('views.cars.gearbox_options.automatic'),
+            self::AUTOMATED_MANUAL => __('views.cars.gearbox_options.robotic'),
+            self::CONTINUOUSLY_VARIABLE => __('views.cars.gearbox_options.variator'),
+            self::DUAL_CLUTCH => __('views.cars.gearbox_options.dual_clutch'),
+            self::SEMI_AUTOMATIC => __('views.cars.gearbox_options.semiautomatic'),
+            self::SEQUENTIAL => __('views.cars.gearbox_options.sequential'),
         };
     }
 }

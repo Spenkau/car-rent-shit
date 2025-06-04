@@ -117,7 +117,12 @@
             <div id="products-wrapper" class="car-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all">
                 @forelse ($products as $product)
                     <div class="product-item car-card bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all">
-                        <img src="{{ $product->settings->image ? asset('storage/' . $product->settings->image) : asset('images/logo.png') }}" alt="{{ $product->name }}" class="w-full h-48 object-cover rounded-lg mb-4 hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='{{ asset('images/cars/placeholder.png') }}';">
+                        <img
+                            src="{{ $product->images->first()?->path ? asset('storage/' . $product->images->first()->path) : asset('images/cars/placeholder.png') }}"
+                            alt="{{ $product->name }}"
+                            class="w-full h-48 object-cover rounded-lg mb-4 hover:scale-105 transition-transform"
+                            onerror="this.onerror=null; this.src='{{ asset('images/cars/placeholder.png') }}';"
+                        >
                         <div class="car-info mb-4">
                             <h3 class="text-xl font-bold text-white">{{ $product->name }}</h3>
                             <ul class="list-none p-0 text-gray-400 text-sm mt-2">

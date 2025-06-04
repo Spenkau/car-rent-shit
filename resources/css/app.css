@@ -1,6 +1,4 @@
 @import 'tailwindcss';
-@import 'tailwindcss';
-@import 'tailwindcss';
 
 body {
     font-family: 'Nunito', sans-serif;
@@ -9,6 +7,13 @@ body {
 
 .site-header {
     backdrop-filter: blur(10px);
+}
+
+.main-nav a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .main-nav a::after {

@@ -17,13 +17,53 @@
                         class="w-full h-[400px] rounded-lg"
                     ></model-viewer>
                 @else
-                    <img
-                        src="{{ $product->settings->image ? asset('storage/' . $product->settings->image) : asset('images/cars/placeholder.png') }}"
-                        alt="{{ $product->name }}"
-                        class="w-full h-[400px] object-cover rounded-lg hover:scale-105 transition-transform"
-                    >
+                    <div class="slider">
+                        @php
+                            $imageCount = $product->images->count() ?: 1; // Количество изображений или 1 для плейсхолдера
+                        @endphp
+                        @for ($i = 0; $i < $imageCount; $i++)
+                            <input type="radio" name="slide_switch" id="slide{{ $i + 1 }}" {{ $i === 0 ? 'checked' : '' }}>
+                        @endfor
+
+                        <div class="slides">
+                            @foreach($product->images as $i => $image)
+                                <img
+                                    src="{{ $image->path ? asset('storage/' . $image->path) : asset('images/cars/placeholder.png') }}"
+                                    alt="{{ $product->name }}"
+                                    class="slide-img img{{ $i + 1 }}"
+                                >
+                            @endforeach
+                            @if($product->images->isEmpty())
+                                <img
+                                    src="{{ asset('images/cars/placeholder.png') }}"
+                                    alt="{{ $product->name }}"
+                                    class="slide-img img1"
+                                >
+                            @endif
+                        </div>
+
+                        <div class="thumbnails">
+                            @foreach($product->images as $i => $image)
+                                <label for="slide{{ $i + 1 }}">
+                                    <img
+                                        src="{{ $image->path ? asset('storage/' . $image->path) : asset('images/cars/placeholder.png') }}"
+                                        alt="thumb-{{ $product->name }}"
+                                    >
+                                </label>
+                            @endforeach
+                            @if($product->images->isEmpty())
+                                <label for="slide1">
+                                    <img
+                                        src="{{ asset('images/cars/placeholder.png') }}"
+                                        alt="thumb-{{ $product->name }}"
+                                    >
+                                </label>
+                            @endif
+                        </div>
+                    </div>
                 @endif
             </div>
+
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="car-info bg-gray-800 rounded-2xl p-6 shadow-lg">
@@ -86,6 +126,68 @@
         </div>
         <x-book-car :product="$product"></x-book-car>
     </section>
+
+    <style>
+        .slider {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .slider input {
+            display: none;
+        }
+
+        .slides {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .slide-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        {!! collect($products)->map(function($_, $i) {
+        $i = $i + 1;
+        return "#slide{$i}:checked ~ .slides .img{$i} { opacity: 1; z-index: 10; }";
+    })->implode("\n") !!}
+
+    .thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .thumbnails label {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .thumbnails label:hover {
+            transform: scale(1.1);
+        }
+
+        .thumbnails img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid transparent;
+        }
+
+        input:checked + label img {
+            border-color: #0e7490; /* cyan-700 */
+        }
+    </style>
 
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 @endsection

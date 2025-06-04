@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::with('settings');
+        $query = Product::with(['settings', 'images']);
 
         if ($request->filled('name')) {
             $query->where('name', 'like', '%' . $request->name . '%');
@@ -43,12 +43,17 @@ class ProductController extends Controller
      */
     public function show($slug): View
     {
+        $products = Product::all();
         $product = Product::with([
             'settings',
+            'images',
             'bookings' => fn ($query) => $query->with('comments')->where('status', '=', BookStatus::FINISHED->value)
         ])->where('slug', '=', $slug)->firstOrFail();
 
-        return view('product.show', compact('product'));
+        return view('product.show', [
+            'products' => $products,
+            'product' => $product,
+        ]);
     }
 
     public function suggestions(Request $request): JsonResponse

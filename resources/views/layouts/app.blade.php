@@ -9,10 +9,8 @@
 </head>
 <body class="bg-gray-900 text-white antialiased flex flex-col min-h-screen">
 
-{{-- Шапка и навигация --}}
 <header class="site-header bg-gray-900/80 border-b border-white/5 py-5">
     <nav class="navbar max-w-7xl mx-auto px-4 flex flex-wrap lg:flex-nowrap items-center justify-between">
-        {{-- Логотип --}}
         <a href="/" class="logo flex items-center">
             <svg width="200" height="60" viewBox="0 0 200 60" fill="none"
                  xmlns="http://www.w3.org/2000/svg" class="h-12">

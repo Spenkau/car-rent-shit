@@ -12,7 +12,7 @@
                 </p>
             </div>
 
-            <!-- Contact Info and Form -->
+            <!-- Contact Info and Map -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Contact Info -->
                 <div class="contact-info bg-gray-800 rounded-2xl p-6 shadow-lg">
@@ -47,16 +47,16 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Map -->
-            <div class="map mt-12">
-                <h2 class="text-2xl font-semibold text-orange-500 mb-4 text-center">@lang('views.contacts.where_to_find_us')</h2>
-                <iframe
-                    class="w-full h-[400px] rounded-2xl shadow-lg"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2394.818693614609!2d23.8258193157991!3d53.68834598005364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dfd9e7e6f7f3b1%3A0x2e8b7e9c6f7e9d3a!2z0YPQuy4g0KHQvtCy0LXRgNC90YvQuSDQldC90L7Qs9C-0LTQutC-0LkgMTAsINCV0YHQv9C10YMsINCR0LXQu9Cw0YDRg9C0!5e0!3m2!1sru!2sby!4v1697644321987!5m2!1sru!2sby"
-                    allowfullscreen="" loading="lazy">
-                </iframe>
+                <!-- Map -->
+                <div class="map">
+                    <h2 class="text-2xl font-semibold text-orange-500 mb-4 text-center">@lang('views.contacts.where_to_find_us')</h2>
+                    <iframe
+                        class="w-full h-[400px] rounded-2xl shadow-lg"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2394.818693614609!2d23.8258193157991!3d53.68834598005364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dfd9e7e6f7f3b1%3A0x2e8b7e9c6f7e9d3a!2z0YPQuy4g0KHQvtCy0LXRgNC90YvQuSDQldC90L7Qs9C-0LTQutC-0LkgMTAsINCV0YHQv9C10YMsINCR0LXQu9Cw0YDRg9C0!5e0!3m2!1sru!2sby!4v1697644321987!5m2!1sru!2sby"
+                        allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
             </div>
         </div>
     </section>

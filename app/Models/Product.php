@@ -43,6 +43,12 @@ class Product extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+
     public function sluggable(): array
     {
         return [

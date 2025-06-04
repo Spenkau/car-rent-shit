@@ -14,6 +14,51 @@ return [
         'phone_placeholder' => '+375(29)191-91-19',
         'car' => 'Car: :name',
         'price_per_day' => 'Price per day: :priceBYN',
+        'error_year' => 'The year must be exactly 4 digits.',
+        'errors' => [
+            'product_id' => [
+                'required' => 'Please select a car.',
+                'integer' => 'The car ID must be an integer.',
+                'exists' => 'The selected car does not exist.',
+            ],
+            'start_date' => [
+                'required' => 'The start date field is required.',
+                'date' => 'The start date must be a valid date.',
+                'after_or_equal' => 'The start date must be on or after today (:currentYear-06-04) and within :currentYear-:nextYear.',
+                'before_or_equal' => 'The start date must be no later than :nextYear-12-31.',
+            ],
+            'end_date' => [
+                'required' => 'The end date field is required.',
+                'date' => 'The end date must be a valid date.',
+                'after_or_equal' => 'The end date must be on or after the start date and within :currentYear-:nextYear.',
+                'before_or_equal' => 'The end date must be no later than :nextYear-12-31.',
+            ],
+            'full_name' => [
+                'required' => 'The full name field is required.',
+                'string' => 'The full name must be a string.',
+            ],
+            'phone' => [
+                'string' => 'The phone number must be a string.',
+                'required' => 'Your phone number is required!',
+            ],
+            'rating' => [
+                'required' => 'Please provide a rating.',
+                'numeric' => 'The rating must be a number.',
+                'between' => 'The rating must be between 1 and 5.',
+            ],
+            'comment' => [
+                'required' => 'Please leave a comment.',
+                'string' => 'The comment must be a string.',
+                'max' => 'The comment must not exceed 1000 characters.',
+            ],
+            'booking' => [
+                'not_finished' => 'The booking is not yet completed.',
+                'already_rated' => 'You have already rated this booking.',
+            ],
+        ],
+        'success' => [
+            'rating' => 'Thank you for your rating!',
+        ],
     ],
     'header' => [
         'home' => 'Home',

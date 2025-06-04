@@ -26,7 +26,7 @@
                 <div
                     class="car-card bg-gray-800 rounded-2xl p-6 w-full sm:w-80 shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all">
                     <img
-                        src="{{ $product->settings->image ? asset('storage/' . $product->settings->image) : asset('images/logo.png') }}"
+                        src="{{ $product->images->first()?->path ? asset('storage/' . $product->images->first()->path) : asset('images/cars/placeholder.png') }}"
                         alt="{{ $product->name }}"
                         class="w-full h-48 object-cover rounded-lg mb-4 hover:scale-105 transition-transform">
                     <div class="car-info mb-4">
@@ -47,7 +47,7 @@
                         </ul>
                     </div>
                     <div class="car-bottom flex justify-center items-center gap-4">
-                        <span class="car-price text-lg font-semibold text-orange-500">@lang('views.cars.price_per_day', ['price' => $product->price])</span>
+                        <span class="car-price text-lg font-semibold text-orange-500">@lang('views.cars.price_per_day', ['price' => $product->settings->price])</span>
                         <a href="{{ route('products.show', $product->slug) }}"
                            class="more-btn bg-cyan-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-cyan-600 hover:scale-105 transition-all">@lang('views.home.offers.more')</a>
                     </div>
