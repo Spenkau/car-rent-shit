@@ -61,15 +61,12 @@
                        name="phone"
                        placeholder="{{ __('views.booking.phone_placeholder') }}"
                        class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500"
-                       value="{{ auth()->check() ? auth()->user()->phone : '' }}">
+                       value="{{ auth()->check() ? auth()->user()->phone : '' }}"
+                       required>
                 <div id="error-phone" class="text-red-500 text-sm mt-1 hidden"></div>
             </div>
 
-            <input type="hidden" name="request_token" value="{{ uniqid() }}">
-
-            <div id="error-dates" class="text-red-500 text-sm mt-1 hidden"></div>
-
-            <button type="submit" id="submit-button"
+            <button type="submit"
                     class="w-full bg-cyan-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-cyan-600 hover:scale-105 transition-all">
                 @lang('views.booking.book_and_pay')
             </button>
@@ -85,7 +82,6 @@
             const form = document.getElementById('booking-form');
             const startDateInput = document.getElementById('start_date');
             const endDateInput = document.getElementById('end_date');
-            const submitButton = document.getElementById('submit-button');
 
             // Функция для очистки всех ошибок
             const clearErrors = () => {
@@ -119,7 +115,7 @@
             restrictYearToFourDigits(startDateInput, 'error-start_date');
             restrictYearToFourDigits(endDateInput, 'error-end_date');
 
-            // Установка min значения для end_date
+            // Существующая логика для установки min значения для end_date
             startDateInput.addEventListener('change', () => {
                 endDateInput.min = startDateInput.value;
             });
@@ -128,8 +124,6 @@
             form.addEventListener('submit', (e) => {
                 e.preventDefault(); // Предотвращаем стандартную отправку формы
                 clearErrors(); // Очищаем предыдущие ошибки
-                submitButton.disabled = true;
-                submitButton.textContent = '@lang("views.booking.submitting")';
 
                 // Проверка года перед отправкой формы
                 const startYear = startDateInput.value.split('-')[0];
@@ -137,15 +131,11 @@
                 if (startYear.length !== 4 || isNaN(startYear)) {
                     document.getElementById('error-start_date').textContent = 'Год должен состоять ровно из 4 цифр.';
                     document.getElementById('error-start_date').classList.remove('hidden');
-                    submitButton.disabled = false;
-                    submitButton.textContent = '@lang("views.booking.book_and_pay")';
                     return;
                 }
                 if (endYear.length !== 4 || isNaN(endYear)) {
                     document.getElementById('error-end_date').textContent = 'Год должен состоять ровно из 4 цифр.';
                     document.getElementById('error-end_date').classList.remove('hidden');
-                    submitButton.disabled = false;
-                    submitButton.textContent = '@lang("views.booking.book_and_pay")';
                     return;
                 }
 
@@ -153,9 +143,7 @@
                     method: 'POST',
                     body: new FormData(form),
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     }
                 })
                     .then(response => response.json())
@@ -169,20 +157,14 @@
                                     errorElement.classList.remove('hidden');
                                 }
                             });
-                            submitButton.disabled = false;
-                            submitButton.textContent = '@lang("views.booking.book_and_pay")';
                         } else if (data.success) {
                             // Успешная отправка
-                            alert(data.success);
                             window.location.href = '/payment?booking_id=' + data.booking_id;
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        document.getElementById('error-dates').textContent = '@lang("views.booking.errors.general")';
-                        document.getElementById('error-dates').classList.remove('hidden');
-                        submitButton.disabled = false;
-                        submitButton.textContent = '@lang("views.booking.book_and_pay")';
+                        alert('Произошла ошибка при отправке формы.');
                     });
             });
 
@@ -198,8 +180,6 @@
                 modal.classList.add('hidden');
                 document.body.classList.remove('overflow-hidden');
                 clearErrors(); // Очищаем ошибки при закрытии
-                submitButton.disabled = false;
-                submitButton.textContent = '@lang("views.booking.book_and_pay")';
             };
 
             closeModalBtn.addEventListener('click', closeModal);
