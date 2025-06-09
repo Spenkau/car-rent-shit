@@ -39,7 +39,8 @@ class ProductResource extends Resource
                 TextInput::make('name')
                     ->label('Название'),
                 TextInput::make('slug')
-                    ->label('Слаг'),
+                    ->label('Слаг')
+                    ->unique(table: 'products', column: 'slug'),
                 Textarea::make('description')
                     ->label('Описание'),
 

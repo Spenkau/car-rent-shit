@@ -10,7 +10,7 @@ class SiteController extends Controller
     public function index()
     {
         return view('index', ['products' => Product::query()
-            ->with('settings')
+            ->with(['settings', 'images'])
             ->orderBy('popularity')
             ->get()
         ]);

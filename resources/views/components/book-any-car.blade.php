@@ -19,7 +19,7 @@
                     @foreach($products as $product)
                         <label class="flex items-center p-3 bg-gray-700 rounded-lg hover:bg-gray-600 cursor-pointer transition group">
                             <input type="radio" name="product_id" value="{{ $product->id }}" class="mr-4">
-                            <img src="{{ $product->images->first()->path ? asset('storage/' . $product->images->first()->path) : asset('images/logo.png') }}" alt="{{ $product->name }}"
+                            <img src="{{ $product->images->first() ? asset('storage/' . $product->images->first()->path) : asset('images/logo.png') }}" alt="{{ $product->name }}"
                                  class="w-16 h-12 object-cover rounded mr-3 border-2 border-transparent group-hover:border-cyan-500">
                             <div>
                                 <div class="text-white font-semibold">{{ $product->name }}</div>
