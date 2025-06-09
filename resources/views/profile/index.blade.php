@@ -66,27 +66,35 @@
                                 <p class="text-sm text-gray-400">@lang('views.profile.payment_status_title'):
                                     <span class="font-medium text-red-400">{{ \App\Enums\BookPayment::NOT_PAID->name() }}</span>
                                 </p>
-                                <a class="btn w-full bg-gray-800 border border-gray-700 text-white text-sm  px-1 py-1 mt-2 rounded"
-                                   href="{{ route('payment.show') . "?booking_id=" . $booking->id }}"
-                                >
+                                <a class="btn w-full bg-gray-800 border border-gray-700 text-white text-sm px-1 py-1 mt-2 rounded"
+                                   href="{{ route('payment.show') . '?booking_id=' . $booking->id }}">
                                     @lang('views.profile.pay_button')
                                 </a>
                             @endif
-
-                            <div class="mt-3">
-                                <button class="mt-3 flex items-center justify-between bg-yellow-500 text-black font-semibold py-2 px-4 rounded cursor-pointer hover:bg-yellow-600 transition"
-                                        @if(auth()->check()) data-toggle="modal" @else onclick="window.location.href='{{ route('login') }}'" @endif>
-                                    @lang('views.profile.rebook')
-                                </button>
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div class="mt-3">
+                                    <button class="flex items-center justify-between bg-yellow-500 text-black font-semibold py-2 px-4 rounded cursor-pointer hover:bg-yellow-600 transition"
+                                            @if(auth()->check()) data-toggle="modal" @else onclick="window.location.href='{{ route('login') }}'" @endif>
+                                        @lang('views.profile.rebook')
+                                    </button>
+                                </div>
+                                @if($booking->status === \App\Enums\BookStatus::WAIT_FOR_APPROVE->value)
+                                    <form method="POST" action="{{ route('bookings.cancel', $booking->id) }}" class="mt-3">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class=" btn bg-red-500 text-white font-semibold py-2 px-4 rounded cursor-pointer hover:bg-red-600 transition"
+                                                onclick="return confirm('@lang('views.profile.confirm_cancel')')">
+                                            @lang('views.profile.cancel_booking')
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                             <x-book-car :product="$booking->product"></x-book-car>
-
                             @php $uniqueId = 'rate-toggle-' . $booking->id; @endphp
 
                             @if($booking->status === \App\Enums\BookStatus::FINISHED->value && is_null($booking->rating))
                                 <div class="mt-4">
                                     <input type="checkbox" id="{{ $uniqueId }}" class="hidden peer">
-
                                     <label for="{{ $uniqueId }}"
                                            class="w-full flex items-center justify-between bg-yellow-500 text-black font-semibold py-2 px-4 rounded cursor-pointer hover:bg-yellow-600 transition"
                                            data-booking-id="{{ $booking->id }}">
@@ -95,14 +103,12 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     </label>
-
                                     <div class="mt-4 hidden peer-checked:block bg-gray-700 border border-gray-600 p-4 rounded-lg">
                                         <form id="rate-form-{{ $booking->id }}" class="space-y-4" data-form-id="{{ $booking->id }}">
                                             @csrf
                                             @method('PATCH')
-
                                             <div>
-                                                <label for="rating-{{ $booking->id }}" class="block text-sm font-medium text-white mb-1">@lang('views.profile.rating_label')</label>
+                                                <label for="rating-{{ $booking->id }}" class="block thext-sm font-medium text-white mb-1">@lang('views.profile.rating_label')</label>
                                                 <select name="rating" id="rating-{{ $booking->id }}"
                                                         class="w-full bg-gray-800 border border-gray-700 text-white py-2 px-3 rounded">
                                                     <option value="" disabled>@lang('views.profile.select_rating')</option>
@@ -112,7 +118,6 @@
                                                 </select>
                                                 <div id="rating-error-{{ $booking->id }}" class="text-red-500 text-sm mt-1"></div>
                                             </div>
-
                                             <div>
                                                 <label for="comment-{{ $booking->id }}" class="block text-sm font-medium text-white mb-1">@lang('views.profile.comment_label')</label>
                                                 <textarea name="comment" id="comment-{{ $booking->id }}" rows="3"
@@ -120,7 +125,6 @@
                                                           placeholder="{{ __('views.profile.comment_placeholder') }}"></textarea>
                                                 <div id="comment-error-{{ $booking->id }}" class="text-red-500 text-sm mt-1"></div>
                                             </div>
-
                                             <button type="submit"
                                                     class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-4 rounded transition">
                                                 @lang('views.profile.submit_review')
@@ -210,14 +214,12 @@
                             return;
                         }
 
-                        // Успешная отправка
                         alert(data.success);
                         form.reset();
                         if (checkbox) checkbox.checked = false;
                         localStorage.removeItem(`form-data-${bookingId}`);
                         localStorage.removeItem(`form-open-${bookingId}`);
 
-                        // Обновляем страницу для отображения изменений
                         setTimeout(() => window.location.reload(), 100);
 
                     } catch (error) {

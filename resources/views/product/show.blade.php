@@ -19,7 +19,7 @@
                 @else
                     <div class="slider">
                         @php
-                            $imageCount = $product->images->count() ?: 1; // Количество изображений или 1 для плейсхолдера
+                            $imageCount = $product->images->count() ?: 1;
                         @endphp
                         @for ($i = 0; $i < $imageCount; $i++)
                             <input type="radio" name="slide_switch" id="slide{{ $i + 1 }}" {{ $i === 0 ? 'checked' : '' }}>
@@ -35,7 +35,7 @@
                             @endforeach
                             @if($product->images->isEmpty())
                                 <img
-                                    src="{{ asset('images/cars/placeholder.png') }}"
+                                    src="{{ $product->images->first() ? asset('storage/' . ($product->images->first()->path ?? 'images/cars/logo.png')) : asset('images/logo.png') }}"
                                     alt="{{ $product->name }}"
                                     class="slide-img img1"
                                 >
@@ -46,7 +46,7 @@
                             @foreach($product->images as $i => $image)
                                 <label for="slide{{ $i + 1 }}">
                                     <img
-                                        src="{{ $image->path ? asset('storage/' . $image->path) : asset('images/cars/placeholder.png') }}"
+                                        src="{{ $product->images->first() ? asset('storage/' . ($product->images->first()->path ?? 'images/cars/logo.png')) : asset('images/logo.png') }}"
                                         alt="thumb-{{ $product->name }}"
                                     >
                                 </label>
@@ -54,7 +54,7 @@
                             @if($product->images->isEmpty())
                                 <label for="slide1">
                                     <img
-                                        src="{{ asset('images/cars/placeholder.png') }}"
+                                        src="{{ $product->images->first() ? asset('storage/' . ($product->images->first()->path ?? 'images/cars/logo.png')) : asset('images/logo.png') }}"
                                         alt="thumb-{{ $product->name }}"
                                     >
                                 </label>

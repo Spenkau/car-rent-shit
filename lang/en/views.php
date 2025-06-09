@@ -248,6 +248,8 @@ return [
         'no_bookings' => 'You haven’t booked anything yet.',
         'bookings_empty' => 'The booking list is empty',
         'error' => 'An error occurred: :message',
+        'cancel_booking' => 'Cancel booking',
+        'confirm_cancel' => 'Confirm cancel',
     ],
     'login' => [
         'title' => 'Login',
@@ -373,7 +375,7 @@ return [
             'receive_car' => 'Receive the car in a clean condition with a full tank of fuel.',
         ],
         'financial_conditions' => [
-            'title' => 'Financial Conditions',
+            'title' => 'Payment',
             'rental_cost' => 'Rental Cost: From :cost BYN/day (depends on the model).',
             'deposit' => 'Deposit: From 200 BYN (refunded if no damage).',
             'payment_methods' => 'Payment: Cash, bank card, or transfer.',

@@ -146,7 +146,7 @@
                     <div
                         class="product-item car-card bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all">
                         <img
-                            src="{{ $product->images->first()?->path ? asset('storage/' . $product->images->first()->path) : asset('images/cars/placeholder.png') }}"
+                            src="{{ $product->images->first() ? asset('storage/' . ($product->images->first()->path ?? 'images/cars/logo.png')) : asset('images/logo.png') }}"
                             alt="{{ $product->name }}"
                             class="w-full h-48 object-cover rounded-lg mb-4 hover:scale-105 transition-transform"
                             onerror="this.onerror=null; this.src='{{ asset('images/cars/placeholder.png') }}';"

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookStatus;
 use App\Models\User;
+use App\Models\Booking;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -32,7 +34,6 @@ class ProfileController extends Controller
         ]);
     }
 
-
     /**
      * @return View
      */
@@ -58,7 +59,6 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Профиль успешно обновлён.');
     }
-
 
     /**
      * @return View

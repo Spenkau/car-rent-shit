@@ -2,7 +2,8 @@
 
 @section('main')
     <section
-        class="main-banner bg-gradient-to-r from-gray-800 via-teal-900 to-gray-800 py-20 text-center h-[400px] flex items-center justify-center"
+        class="main-banner bg-gradient-to-r from-gray-800 via-teal-900 to-gray-800 py-20 text-center h-[400px] flex items-center justify-center bg-cover bg-center"
+        style="background-image: url('{{ asset('images/audi-car.png') }}'); background-position: center 55%;"
         id="home">
         <div class="banner-content max-w-4xl mx-auto">
             <h1 class="text-5xl md:text-5xl font-bold uppercase text-white mb-6">@lang('views.home.main_banner.title')</h1>
@@ -26,7 +27,7 @@
                 <div
                     class="car-card bg-gray-800 rounded-2xl p-6 w-full sm:w-80 shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all">
                     <img
-                        src="{{ $product->images->first()?->path ? asset('storage/' . $product->images->first()->path) : asset('images/cars/placeholder.png') }}"
+                        src="{{ $product->images->first() ? asset('storage/' . ($product->images->first()->path ?? 'images/cars/logo.png')) : asset('images/logo.png') }}"
                         alt="{{ $product->name }}"
                         class="w-full h-48 object-cover rounded-lg mb-4 hover:scale-105 transition-transform">
                     <div class="car-info mb-4">
