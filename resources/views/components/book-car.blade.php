@@ -1,7 +1,7 @@
 @props(['product'])
 
 <div id="booking-modal"
-     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden px-2 sm:px-4 overflow-y-auto">
+     class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden px-2 sm:px-4 overflow-y-auto">
     <div class="modal-content bg-gray-800 rounded-2xl p-4 sm:p-6 w-full max-w-md sm:max-w-lg my-10">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg sm:text-xl font-bold text-white">
@@ -11,7 +11,8 @@
         </div>
 
         <div class="text-white text-sm sm:text-base mb-4">
-            <img src="{{ $product->images->first()->path ? asset('storage/' . $product->images->first()->path) : asset('images/logo.png') }}" alt="{{ $product->name }}"
+            <img src="{{ $product->images->first() ? asset('storage/' . ($product->images->first()->path ?? 'images/cars/logo.png')) : asset('images/logo.png') }}"
+                 alt="{{ $product->name }}"
                  class="w-full object-cover rounded mr-3 border-2 border-transparent group-hover:border-cyan-500">
             <p>@lang('views.booking.car', ['name' => $product->name])</p>
             <p>@lang('views.booking.price_per_day', ['price' => $product->settings->price])</p>
@@ -60,12 +61,15 @@
                        name="phone"
                        placeholder="{{ __('views.booking.phone_placeholder') }}"
                        class="w-full bg-gray-700 text-white rounded-md px-4 py-2 mt-1 focus:ring-2 focus:ring-cyan-500"
-                       value="{{ auth()->check() ? auth()->user()->phone : '' }}"
-                       required>
+                       value="{{ auth()->check() ? auth()->user()->phone : '' }}">
                 <div id="error-phone" class="text-red-500 text-sm mt-1 hidden"></div>
             </div>
 
-            <button type="submit"
+            <input type="hidden" name="request_token" value="{{ uniqid() }}">
+
+            <div id="error-dates" class="text-red-500 text-sm mt-1 hidden"></div>
+
+            <button type="submit" id="submit-button"
                     class="w-full bg-cyan-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-cyan-600 hover:scale-105 transition-all">
                 @lang('views.booking.book_and_pay')
             </button>
@@ -81,6 +85,7 @@
             const form = document.getElementById('booking-form');
             const startDateInput = document.getElementById('start_date');
             const endDateInput = document.getElementById('end_date');
+            const submitButton = document.getElementById('submit-button');
 
             // Функция для очистки всех ошибок
             const clearErrors = () => {
@@ -114,7 +119,7 @@
             restrictYearToFourDigits(startDateInput, 'error-start_date');
             restrictYearToFourDigits(endDateInput, 'error-end_date');
 
-            // Существующая логика для установки min значения для end_date
+            // Установка min значения для end_date
             startDateInput.addEventListener('change', () => {
                 endDateInput.min = startDateInput.value;
             });
@@ -123,6 +128,8 @@
             form.addEventListener('submit', (e) => {
                 e.preventDefault(); // Предотвращаем стандартную отправку формы
                 clearErrors(); // Очищаем предыдущие ошибки
+                submitButton.disabled = true;
+                submitButton.textContent = '@lang("views.booking.submitting")';
 
                 // Проверка года перед отправкой формы
                 const startYear = startDateInput.value.split('-')[0];
@@ -130,11 +137,15 @@
                 if (startYear.length !== 4 || isNaN(startYear)) {
                     document.getElementById('error-start_date').textContent = 'Год должен состоять ровно из 4 цифр.';
                     document.getElementById('error-start_date').classList.remove('hidden');
+                    submitButton.disabled = false;
+                    submitButton.textContent = '@lang("views.booking.book_and_pay")';
                     return;
                 }
                 if (endYear.length !== 4 || isNaN(endYear)) {
                     document.getElementById('error-end_date').textContent = 'Год должен состоять ровно из 4 цифр.';
                     document.getElementById('error-end_date').classList.remove('hidden');
+                    submitButton.disabled = false;
+                    submitButton.textContent = '@lang("views.booking.book_and_pay")';
                     return;
                 }
 
@@ -142,7 +153,9 @@
                     method: 'POST',
                     body: new FormData(form),
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
                     }
                 })
                     .then(response => response.json())
@@ -156,14 +169,20 @@
                                     errorElement.classList.remove('hidden');
                                 }
                             });
+                            submitButton.disabled = false;
+                            submitButton.textContent = '@lang("views.booking.book_and_pay")';
                         } else if (data.success) {
                             // Успешная отправка
+                            alert(data.success);
                             window.location.href = '/payment?booking_id=' + data.booking_id;
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert('Произошла ошибка при отправке формы.');
+                        document.getElementById('error-dates').textContent = '@lang("views.booking.errors.general")';
+                        document.getElementById('error-dates').classList.remove('hidden');
+                        submitButton.disabled = false;
+                        submitButton.textContent = '@lang("views.booking.book_and_pay")';
                     });
             });
 
@@ -179,6 +198,8 @@
                 modal.classList.add('hidden');
                 document.body.classList.remove('overflow-hidden');
                 clearErrors(); // Очищаем ошибки при закрытии
+                submitButton.disabled = false;
+                submitButton.textContent = '@lang("views.booking.book_and_pay")';
             };
 
             closeModalBtn.addEventListener('click', closeModal);

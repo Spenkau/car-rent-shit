@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gray-900 text-white antialiased flex flex-col min-h-screen">
 
-<header class="site-header bg-gray-900/80 border-b border-white/5 py-5">
+<header class="site-header bg-gray-900/80 border-b border-white/5 py-5 fixed top-0 left-0 w-full z-50">
     <nav class="navbar max-w-7xl mx-auto px-4 flex flex-wrap lg:flex-nowrap items-center justify-between">
         <a href="/" class="logo flex items-center">
             <svg width="200" height="60" viewBox="0 0 200 60" fill="none"
@@ -121,7 +121,7 @@
 </header>
 
 {{-- Основной контент --}}
-<main class="flex-grow">
+<main class="flex-grow pt-20">
     @yield('main')
 </main>
 

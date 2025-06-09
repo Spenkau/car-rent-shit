@@ -22,6 +22,7 @@ Route::prefix('products')->name('products.')->group(function ()  {
 
 Route::resource('booking', BookingController::class);
 Route::patch('/bookings/{booking}/rate', [BookingController::class, 'rate'])->name('booking.rate');
+Route::delete('/bookings/{booking}', [BookingController::class, 'cancelBooking'])->name('bookings.cancel');
 
 Route::get('/payment', [PaymentController::class, 'show'])->name('payment.show');
 Route::post('/payment/confirm', [PaymentController::class, 'confirm'])->name('payment.confirm');
