@@ -40,7 +40,7 @@
                                 @endif
                             </li>
                             <li>
-                                @if($product->settings->gearbox_type)
+                                @if(isset($product->settings->gearbox_type))
                                     @lang('views.home.offers.gearbox_type', ['value' => $product->settings->gearbox_type])
                                 @endif
                             </li>
