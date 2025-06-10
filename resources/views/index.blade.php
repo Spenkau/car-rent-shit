@@ -35,7 +35,7 @@
                         <ul class="list-none p-0 text-gray-400 text-sm">
                             <li>@lang('views.home.offers.year', ['value' => $product->settings->release_year ?? 'N/A'])</li>
                             <li>
-                                @if($product->settings->engine_volume)
+                                @if(isset($product->settings->engine_volume))
                                     @lang('views.home.offers.engine_volume', ['value' => $product->settings->engine_volume])
                                 @endif
                             </li>
