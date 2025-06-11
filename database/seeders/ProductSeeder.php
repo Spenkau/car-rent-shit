@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
 //                    'is_on_credit' => false,
                     'price' => 90.00,
 //                    'model_3d' => 'models/tesla-model-3.glb',
-                    'image' => 'images/cars/tesla-model-3.jpg',
+//                    'image' => 'images/cars/tesla-model-3.jpg',
                 ],
             ],
             [
@@ -62,7 +62,7 @@ class ProductSeeder extends Seeder
 //                    'is_on_credit' => false,
                     'price' => 120.00,
 //                    'model_3d' => 'models/ford-mustang.glb',
-                    'image' => 'images/cars/ford-mustang.png',
+//                    'image' => 'images/cars/ford-mustang.png',
                 ],
             ],
             [
@@ -88,7 +88,7 @@ class ProductSeeder extends Seeder
 //                    'is_on_credit' => false,
                     'price' => 100.00,
 //                    'model_3d' => 'models/bmw-m4.glb',
-                    'image' => 'images/cars/bmw-m4.png',
+//                    'image' => 'images/cars/bmw-m4.png',
                 ],
             ],
             [
@@ -114,7 +114,7 @@ class ProductSeeder extends Seeder
 //                    'is_on_credit' => false,
                     'price' => 80.00,
 //                    'model_3d' => 'models/toyota-supra.glb',
-                    'image' => 'images/cars/toyota-supra.png',
+//                    'image' => 'images/cars/toyota-supra.png',
                 ],
             ],
             [
@@ -140,7 +140,7 @@ class ProductSeeder extends Seeder
 //                    'is_on_credit' => false,
                     'price' => 150.00,
 //                    'model_3d' => 'models/porsche-911.glb',
-                    'image' => 'images/cars/porsche-911.png',
+//                    'image' => 'images/cars/porsche-911.png',
                 ],
             ],
         ];
