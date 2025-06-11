@@ -13,30 +13,21 @@ class CreateProduct extends CreateRecord
 {
     protected static string $resource = ProductResource::class;
 
-    /**
-     * @throws Exception
-     */
-    protected function handleRecordCreation(array $data): Product
+    protected function getHeaderActions(): array
     {
-        $product = Product::query()->create([
-            'name' => $data['name'],
-            'slug' => $data['slug'],
-            'description' => $data['description'] ?? null,
-        ]);
+        return [];
+    }
 
-        if (isset($data['settings']) && !empty($data['settings'])) {
-            $settingsData = $data['settings'];
-            $settingsData['product_id'] = $product->id;
+    protected function afterSave(): void
+    {
+        if (!empty($this->data['settings'])) {
+            $settings = array_filter($this->data['settings']);
 
-            if (empty($settingsData['release_year'])) {
-                throw new Exception('Год выпуска обязателен.');
+            if (isset($settings['image'])) {
+                $settings['image'] = array_pop($settings['image']);
             }
 
-            ProductSetting::query()->create($settingsData);
-        } else {
-            throw new Exception('Данные настроек продукта отсутствуют или не заполнены.');
+            $this->record->settings()->create($settings);
         }
-
-        return $product;
     }
 }

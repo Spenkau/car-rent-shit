@@ -50,7 +50,7 @@
                     </form>
                     @forelse($bookings as $booking)
                         <div class="mb-6 border border-gray-700 rounded-xl p-4 bg-gray-700">
-                            <h3 class="text-xl font-bold text-cyan-400">{{ $booking->product->name }}</h3>
+                            <h3 class="text-xl font-bold text-cyan-400">{{ $booking->product ? $booking->product->name : 'Продукт удалён' }}</h3>
                             <p class="text-sm text-gray-300 mt-1">
                                 @lang('views.profile.booking_dates', [
                                     'start_date' => \Carbon\Carbon::parse($booking->start_date)->format('d.m.Y'),
