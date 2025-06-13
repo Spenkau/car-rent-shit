@@ -31,12 +31,7 @@ class ProductSeeder extends Seeder
                     'seats_count' => 5,
                     'color' => 'черный',
                     'vin' => '5YJ3E1EA0NF123456',
-//                    'is_customs_cleared' => true,
-//                    'is_crashed' => false,
-//                    'is_on_credit' => false,
-                    'price' => 90.00,
-//                    'model_3d' => 'models/tesla-model-3.glb',
-//                    'image' => 'images/cars/tesla-model-3.jpg',
+                    'price' => 90.00
                 ],
             ],
             [
@@ -57,12 +52,7 @@ class ProductSeeder extends Seeder
                     'seats_count' => 4,
                     'color' => 'красный',
                     'vin' => '1FA6P8TH0F5123456',
-//                    'is_customs_cleared' => true,
-//                    'is_crashed' => false,
-//                    'is_on_credit' => false,
-                    'price' => 120.00,
-//                    'model_3d' => 'models/ford-mustang.glb',
-//                    'image' => 'images/cars/ford-mustang.png',
+                    'price' => 120.00
                 ],
             ],
             [
@@ -83,12 +73,7 @@ class ProductSeeder extends Seeder
                     'seats_count' => 4,
                     'color' => 'синий',
                     'vin' => 'WBS4Y9C0XMF123456',
-//                    'is_customs_cleared' => true,
-//                    'is_crashed' => false,
-//                    'is_on_credit' => false,
-                    'price' => 100.00,
-//                    'model_3d' => 'models/bmw-m4.glb',
-//                    'image' => 'images/cars/bmw-m4.png',
+                    'price' => 100.00
                 ],
             ],
             [
@@ -109,12 +94,7 @@ class ProductSeeder extends Seeder
                     'seats_count' => 4,
                     'color' => 'серебристый',
                     'vin' => 'JT2DE82A0W0123456',
-//                    'is_customs_cleared' => true,
-//                    'is_crashed' => false,
-//                    'is_on_credit' => false,
-                    'price' => 80.00,
-//                    'model_3d' => 'models/toyota-supra.glb',
-//                    'image' => 'images/cars/toyota-supra.png',
+                    'price' => 80.00
                 ],
             ],
             [
@@ -135,12 +115,7 @@ class ProductSeeder extends Seeder
                     'seats_count' => 4,
                     'color' => 'белый',
                     'vin' => 'WP0AA2A0XLL123456',
-//                    'is_customs_cleared' => true,
-//                    'is_crashed' => false,
-//                    'is_on_credit' => false,
-                    'price' => 150.00,
-//                    'model_3d' => 'models/porsche-911.glb',
-//                    'image' => 'images/cars/porsche-911.png',
+                    'price' => 150.00
                 ],
             ],
         ];

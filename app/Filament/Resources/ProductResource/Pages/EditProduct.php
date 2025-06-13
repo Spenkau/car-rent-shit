@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ProductResource\Pages;
 
 use App\Filament\Resources\ProductResource;
+use App\Models\Product;
 use App\Models\ProductSetting;
 use Doctrine\DBAL\Schema\View;
 use Filament\Actions;
@@ -27,7 +28,13 @@ class EditProduct extends EditRecord
             $settings = array_filter($this->data['settings']);
 
             if (isset($settings['image'])) {
-                $settings['image'] = array_pop($settings['image']);
+                $imagePath = array_pop($settings['image']);
+                unset($settings['image']);
+
+                $this->record->images()->create([
+                    'product_id' => $this->record->id,
+                    'path' => $imagePath
+                ]);
             }
 
             ProductSetting::query()->where('product_id', '=', $this->data['id'])->update($settings);

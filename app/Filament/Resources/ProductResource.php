@@ -38,13 +38,10 @@ class ProductResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->label('Название'),
-                TextInput::make('slug')
-                    ->label('Слаг')
-                    ->unique(table: 'products', column: 'slug'),
                 Textarea::make('description')
                     ->label('Описание'),
 
-                Section::make('Настройки продукта')->relationship('settings')->schema([
+                Section::make('Настройки продукта')->schema([
                     TextInput::make('settings.release_year')
                         ->label('Год выпуска')
                         ->numeric()
@@ -143,13 +140,6 @@ class ProductResource extends Resource
                 ]),
             ]);
     }
-
-//    public static function getRelations(): array
-//    {
-//        return [
-//            //
-//        ];
-//    }
 
     public static function getPages(): array
     {

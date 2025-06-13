@@ -56,12 +56,16 @@ class ProductController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function suggestions(Request $request): JsonResponse
     {
         $query = $request->get('query', '');
 
         if (trim($query) === '') {
-            return response()->json([]);
+            return response()->json();
         }
 
         $matches = Product::query()->where('name', 'LIKE', "%{$query}%")

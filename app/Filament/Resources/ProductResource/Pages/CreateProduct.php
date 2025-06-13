@@ -18,16 +18,25 @@ class CreateProduct extends CreateRecord
         return [];
     }
 
-    protected function afterSave(): void
+    protected function afterCreate(): void
     {
-        if (!empty($this->data['settings'])) {
-            $settings = array_filter($this->data['settings']);
+        $product = $this->record;
 
-            if (isset($settings['image'])) {
-                $settings['image'] = array_pop($settings['image']);
-            }
-
-            $this->record->settings()->create($settings);
+        if (! $product instanceof Product) {
+            return;
         }
+
+        $settings = array_filter(data_get($this->data, 'settings'));
+
+        if (isset($settings['image'])) {
+            $imagePath = array_pop($settings['image']);
+            unset($settings['image']);
+
+            $product->images()->create([
+                'path' => $imagePath
+            ]);
+        }
+
+        $product->settings()->create($settings);
     }
 }

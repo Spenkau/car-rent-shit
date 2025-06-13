@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class LanguageController extends Controller
 {
-    public function switchLang($locale)
+    /**
+     * @param string $locale
+     * @return RedirectResponse
+     */
+    public function switchLang(string $locale): RedirectResponse
     {
         if (in_array($locale, ['ru', 'en'])) {
             session()->put('locale', $locale);
         }
-        return redirect('/'); // вернёт на главную страницу напрямую
-    }
 
+        return redirect()->back();
+    }
 }
 
