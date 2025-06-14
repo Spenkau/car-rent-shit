@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: laravel-app
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: "production"
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: "sqlite"
+    runtime: docker
+databases:
+  - name: laravel-db
+    plan: free
