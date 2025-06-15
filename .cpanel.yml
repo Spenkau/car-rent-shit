@@ -1,0 +1,26 @@
+deployment:
+  tasks:
+    - export COMPOSER_ALLOW_SUPERUSER=1
+    - /opt/cpanel/ea-php82/root/usr/bin/php -v
+    - echo "PHP version OK"
+
+    - /opt/cpanel/ea-php82/root/usr/bin/php /home/autogrodsi/laravel-prjct/composer.phar install --no-dev --optimize-autoloader
+
+    - echo "Composer install completed"
+
+    - cp /home/autogrodsi/laravel-prjct/.env.production /home/autogrodsi/laravel-prjct/.env
+
+    - /opt/cpanel/ea-php82/root/usr/bin/php artisan config:cache
+    - /opt/cpanel/ea-php82/root/usr/bin/php artisan route:cache
+    - /opt/cpanel/ea-php82/root/usr/bin/php artisan view:cache
+
+    - echo "Laravel caches built"
+
+    - chmod -R 775 storage bootstrap/cache
+    - chown -R autogrodsi:autogrodsi storage bootstrap/cache
+
+    - echo "Permissions set"
+
+    - ln -sfn /home/autogrodsi/laravel-prjct/public /home/autogrodsi/public_html
+
+    - echo "Symlink to public_html created"
